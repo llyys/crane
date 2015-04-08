@@ -110,6 +110,8 @@ The map of containers consists of the name of the container mapped to the contai
 * `start` (object, optional): Parameters mapped to Docker's `start`.
 	* `attach` (boolean)
 	* `interactive` (boolean)
+* `random-name` (boolean, optional): Will generate random name for container. NB this will affect rm and stop commands you should now stop containers by using docker stop <container_id>.
+	
 
 Note that basic environment variable expansion (`${FOO}`, `$FOO`) is supported throughout the configuration, but advanced shell features such as command substitution (`$(cat foo)`, `` `cat foo` ``) or advanced expansions (`sp{el,il,al}l`, `foo*`, `~/project`, `$((A * B))`, `${PARAMETER#PATTERN}`) are *not* as the Docker CLI is called directly.
 

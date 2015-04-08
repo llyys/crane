@@ -46,6 +46,7 @@ type container struct {
 	RunParams     RunParameters   `json:"run" yaml:"run"`
 	RmParams      RmParameters    `json:"rm" yaml:"rm"`
 	StartParams   StartParameters `json:"start" yaml:"start"`
+	RandomName    bool            `json:"random-name" yaml:"random-name"`
 }
 
 type RunParameters struct {
@@ -595,8 +596,12 @@ func (c *container) createArgs() []string {
 	if len(c.RunParams.Workdir()) > 0 {
 		args = append(args, "--workdir", c.RunParams.Workdir())
 	}
-	// Name
-	args = append(args, "--name", c.Name())
+
+	// If starting container with name we cannot instantiate multiple containers
+	if !c.RandomName {
+		args = append(args, "--name", c.Name())
+	}
+
 	// Image
 	args = append(args, c.Image())
 	// Command
